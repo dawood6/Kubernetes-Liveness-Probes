@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: liveness
+  name: http-probe
+spec:
+  containers:
+  - name: con1
+    image: dawood6/paintswebpage:latest
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 8080
+        httpHeaders:
+        - name: Custom-head
+          value: Awesome
+      initialDelaySeconds: 3
+      periodSeconds: 3
